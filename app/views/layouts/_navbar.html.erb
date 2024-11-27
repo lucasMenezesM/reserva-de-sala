@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">  
+    <%= link_to root_path, class: "navbar-brand" do%>
+      <i class="fa-solid fa-book"></i> Reservation Control
+    <%end%>
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= link_to reservations_path, class: "nav-link #{'active' if request.path == root_path}" do %>
+              <i class="fa-solid fa-bookmark"></i> Reservations
+            <%end%>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Manage
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to rooms_path, class: "dropdown-item" do %>
+                  Rooms
+                <%end%>
+              </li>
+            
+              <li><hr class="dropdown-divider"></li>
+
+              <li>
+                <%= link_to floors_path, class: "dropdown-item" do %>
+                  Floors
+                <%end%>
+              </li>
+              <li>
+                <%= link_to buildings_path, class: "dropdown-item" do %>
+                  Buildings
+                <%end%>
+              </li>
+            </ul>
+          </li>
+          
+        </ul>
+
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <%if user_signed_in? %>
+            <li class="nav-item nav-link active me-2">Welcome, <%=current_user.name%></li>
+            <li class="nav-itm">
+              <%= link_to user_destroy_session, class: "nav-link active", method: :delete do%>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+              <%end%>
+            </li>
+          <%else%>
+            <li class="nav-itm me-2">
+              <%= link_to new_user_session_path, class: "nav-link active" do%>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+              <%end%>
+            </li>
+            <li class="nav-itm">
+              <%= link_to new_user_registration_path, class: "nav-link active" do%>
+                <i class="fa-solid fa-door-open"></i> Sign Up
+              <%end%>
+            </li>
+          <%end%>
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
