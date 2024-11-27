@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: reserva_sala_development
+
+test:
+  <<: *default
+  database: reserva_sala_test
+
+production:
+  <<: *default
+  database: reserva_sala_production
+  username: your_pg_production_username
+  password: <%= ENV['DB_PASSWORD'] %>
