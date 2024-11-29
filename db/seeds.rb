@@ -85,6 +85,16 @@ reservations = Reservation.create([
 
   {user: users[1], room: rooms[5], schedule: "2024-11-30T17:30:00"},
   {user: users[2], room: rooms[5], schedule: "2024-11-30T15:30:00"},
-  {user: users[2], room: rooms[4], schedule: "2024-11-29T09:30:00"},
-  {user: users[3], room: rooms[5], schedule: "2024-11-30T09:30:00"}
+  {user: users[2], room: rooms[24], schedule: "2024-11-29T09:30:00"},
+  {user: users[3], room: rooms[22], schedule: "2024-11-30T09:30:00"},
+
+  {user: users[5], room: rooms[10], schedule: "2024-12-27T10:00:00"},
+  {user: users[5], room: rooms[11], schedule: "2024-12-28T12:00:00"},
+  {user: users[4], room: rooms[13], schedule: "2024-12-28T16:00:00"},
+  {user: users[4], room: rooms[17], schedule: "2024-12-29T15:30:00"},
+
+  {user: users[5], room: rooms[21], schedule: "2024-12-30T17:30:00"},
+  {user: users[4], room: rooms[15], schedule: "2024-12-30T15:30:00"},
+  {user: users[2], room: rooms[14], schedule: "2024-12-29T09:30:00"},
+  {user: users[3], room: rooms[20], schedule: "2024-12-30T09:30:00"}
 ])

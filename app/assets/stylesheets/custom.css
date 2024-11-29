@@ -1,3 +1,7 @@
 #footer span, #footer a{
   color: white !important
 }
+
+#reservations_results_table{
+  border-radius: 10px !important;
+}

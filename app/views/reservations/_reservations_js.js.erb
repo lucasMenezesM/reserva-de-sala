@@ -1,0 +1,1 @@
+document.querySelector("#reservations-display").innerHTML = '<%= escape_javascript(render "reservations/reservations_results", reservations: @reservations, q: @q)%>'
