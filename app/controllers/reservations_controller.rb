@@ -1,7 +1,15 @@
 class ReservationsController < ApplicationController
   before_action :set_reservations, only: [:index, :search_reservations]
-  
+
   def index
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Reservations Registered - #{Date.today}",
+               template: "reservations/reservations",
+               locals: {reservations: Reservation.all}
+      end
+    end
   end
   
   def create

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= "Reservations - #{Date.today.strftime("%m/%d/%Y")}" %></title>
+</head>
+<body>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+h1 {
+  text-align: center;
+  color: #4CAF50;
+}
+</style>
+
+<h1>Registered Reserves - <%= Date.today.strftime("%m/%d/%Y") %></h1>
+
+<table>
+<thead>
+  <tr>
+    <th>Room</th>
+    <th>Building</th>
+    <th>Floor</th>
+    <th>Schedule</th>
+    <th>Made at</th>
+  </tr>
+</thead>
+
+<tbody>
+  <%reservations.each do |reservation|%>
+    <tr>
+      <td><%=reservation.room.name%></td>
+      <td><%=reservation.room.building.name%></td>
+      <td><%=reservation.room.floor.name%></td>
+      <td><%=reservation.get_formatted_reservation_schedule%></td>
+      <td><%=reservation.created_at.to_s(:long)%></td>
+    </tr>
+  <%end%>
+</tbody>
+</table>
+</body>
+</html>

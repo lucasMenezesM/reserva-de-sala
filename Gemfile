@@ -64,3 +64,6 @@ gem "pg"
 gem "devise", "~> 4.9"
 
 gem 'will_paginate'
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

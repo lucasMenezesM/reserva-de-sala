@@ -1,5 +1,6 @@
 #footer span, #footer a{
-  color: white !important
+  color: white !important;
+  margin-bottom: 0;
 }
 
 #reservations_results_table{

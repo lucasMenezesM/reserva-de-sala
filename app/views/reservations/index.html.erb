@@ -1,6 +1,7 @@
-<%= render "reservations/search_form", q: @q%>
+<div>
+  <%= render "reservations/search_form", q: @q%>
+</div>
 
 <div id="reservations-display">
-
-<%= render "reservations/reservations_results", q: @q, reservations: @reservations%>
+  <%= render "reservations/reservations_results", q: @q, reservations: @reservations%>
 </div>
