@@ -60,4 +60,7 @@ gem 'dotenv-rails'
 gem "ransack"
 
 gem "pg"
+
 gem "devise", "~> 4.9"
+
+gem 'will_paginate'
