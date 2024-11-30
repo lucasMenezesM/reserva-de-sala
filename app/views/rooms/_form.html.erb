@@ -1,6 +1,6 @@
-<%= form_with(model: room) do |form| %>
+<%= form_with(model: room, class: "bg-dark text-white p-4 new-room-form") do |form| %>
   <% if room.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
 
       <ul>
@@ -11,27 +11,42 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="row mb-3">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= form.label :name, class: "control-label text-white" %>
+        <%= form.text_field :name, class: "form-control bg-dark text-white", required: true %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= form.label :capacity, class: "control-label text-white" %>
+        <%= form.number_field :capacity, class: "form-control bg-dark text-white", required: true %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :block_id %>
-    <%= form.text_field :block_id %>
+  <div class="row mb-4">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= form.label :Building, class: "control-label text-white" %>
+        <%= form.select :building_id, Building.all.map { |building| [building.name, building.id] }, { prompt: "Select a Building" }, { class: "form-control bg-dark text-white" } %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= form.label :Floor, class: "control-label text-white" %>
+        <%= form.select :floor_id, Floor.all.map { |floor| [floor.name, floor.id] }, { prompt: "Select a Floor" }, { class: "form-control bg-dark text-white" } %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :floor_id %>
-    <%= form.text_field :floor_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :capacity %>
-    <%= form.number_field :capacity %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mb-3 mt-5">
+    <%= button_tag(type: 'submit', class: 'btn btn-success me-2') do %>
+      <i class="fa-solid fa-check"></i> Create Room
+    <% end %>
+    <%= link_to rooms_path, class: 'btn btn-secondary' do %>
+      <i class="fa-solid fa-arrow-left-long"></i> Back
+    <%end%>
   </div>
 <% end %>

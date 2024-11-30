@@ -1,9 +1,17 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[ show edit update destroy ]
+  before_action :set_rooms, only: [:index, :search_rooms]
 
   # GET /rooms or /rooms.json
   def index
-    @rooms = Room.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Rooms Registered - #{Date.today}",
+               template: "rooms/rooms",
+               locals: {rooms: Room.all}
+      end
+    end
   end
 
   # GET /rooms/1 or /rooms/1.json
@@ -57,14 +65,25 @@ class RoomsController < ApplicationController
     end
   end
 
+  def search_rooms
+    respond_to do |format|
+      format.js {render partial: "rooms/rooms"}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
     end
 
+    def set_rooms
+      @q = Room.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+      @rooms = @q.result(distinct: true)
+    end
+
     # Only allow a list of trusted parameters through.
     def room_params
-      params.require(:room).permit(:name, :block_id, :floor_id, :capacity)
+      params.require(:room).permit(:name, :building_id, :floor_id, :capacity)
     end
 end

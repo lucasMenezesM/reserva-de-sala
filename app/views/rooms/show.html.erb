@@ -1,24 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
-
-<p>
-  <strong>Block:</strong>
-  <%= @room.block_id %>
-</p>
-
-<p>
-  <strong>Floor:</strong>
-  <%= @room.floor_id %>
-</p>
-
-<p>
-  <strong>Capacity:</strong>
-  <%= @room.capacity %>
-</p>
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<div class="card mt-4 shadow-sm bg-dark text-white">
+  <div class="card-header bg-secondary text-white">
+    <h2 class="mb-0">Room Details</h2>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>Name:</strong> <%= @room.name %></p>
+    <p class="card-text"><strong>Building:</strong> <%= @room.building.name %></p>
+    <p class="card-text"><strong>Floor:</strong> <%= @room.floor.name %></p>
+    <p class="card-text"><strong>Capacity:</strong> <%= @room.capacity %></p>
+  </div>
+  <div class="card-footer d-flex justify-content-between">
+    <div>
+      <%= link_to rooms_path, class: 'btn btn-success' do%>
+        Make your reservation  
+      <%end%>
+    </div>
+    <div>
+      <%= link_to 'Edit', edit_room_path(@room), class: 'btn btn-primary' %>
+      <%= link_to 'Back', rooms_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+</div>
