@@ -2,7 +2,7 @@ class Room < ApplicationRecord
   belongs_to :building
   belongs_to :floor
 
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
   has_many :users, through: :reservations
 
   validates :name, :capacity, presence: true

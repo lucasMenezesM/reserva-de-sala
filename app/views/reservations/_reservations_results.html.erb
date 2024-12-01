@@ -14,6 +14,7 @@
             <th><%= sort_link(q, :room_floor_name, "Floor") %></th>
             <th><%= sort_link(q, :schedule, "Reservation") %></th>
             <th><%= sort_link(q, :created_at, "Made at") %></th>
+            <th>Available Actions</th>
           </tr>
         </thead>
 
@@ -25,6 +26,15 @@
               <td><%= reservation.room.floor.name %></td>
               <td><%= reservation.get_formatted_reservation_schedule %></td>
               <td><%= reservation.created_at.to_s(:long) %></td>
+              <% if can? :destroy, reservation %>
+                <td>
+                  <%= link_to reservation_path(reservation), class: "btn btn-sm btn-danger", method: :delete, :data => {:confirm => "Are you sure you want to cancel the Reservation for Room #{reservation.room.name}?"} do%>
+                    Cancel Reservation
+                  <%end%>
+                </td>
+              <%else%>
+                <td></td>
+              <%end%>
             </tr>
           <% end %>
         </tbody>
@@ -34,8 +44,10 @@
         <%= will_paginate reservations, class: "apple_pagination" %>
       </div>
 
-      <%=link_to reservations_path(format: 'pdf'), class: "btn btn-danger btn-sm mt-3", target: '_blank' do%>
-        <i class="fa-solid fa-file-pdf"></i> Generate PDF
+      <% if can? :manage, Reservation%>
+        <%=link_to reservations_path(format: 'pdf'), class: "btn btn-danger btn-sm mt-3", target: '_blank' do%>
+          <i class="fa-solid fa-file-pdf"></i> Generate PDF
+        <%end%>
       <%end%>
     </div>
           

@@ -4,9 +4,12 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
+    authorize! :read, Room
+
     respond_to do |format|
       format.html
       format.pdf do
+        authorize! :manage, Room
         render pdf: "Rooms Registered - #{Date.today}",
                template: "rooms/rooms",
                locals: {rooms: Room.all}
@@ -16,19 +19,24 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    authorize! :read, Room
   end
 
   # GET /rooms/new
   def new
+    authorize! :create, Room
     @room = Room.new
   end
 
   # GET /rooms/1/edit
   def edit
+    authorize! :update, Room
   end
 
   # POST /rooms or /rooms.json
   def create
+    authorize! :create, Room
+    
     @room = Room.new(room_params)
 
     respond_to do |format|
@@ -44,6 +52,8 @@ class RoomsController < ApplicationController
 
   # PATCH/PUT /rooms/1 or /rooms/1.json
   def update
+    authorize! :update, Room
+
     respond_to do |format|
       if @room.update(room_params)
         format.html { redirect_to @room, notice: "Room was successfully updated." }
@@ -57,6 +67,8 @@ class RoomsController < ApplicationController
 
   # DELETE /rooms/1 or /rooms/1.json
   def destroy
+    authorize! :destroy, Room
+    
     @room.destroy
 
     respond_to do |format|
