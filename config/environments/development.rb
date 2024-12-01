@@ -12,7 +12,11 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
+  # change to false to enable the customized error pages in development environment
   config.consider_all_requests_local = true
+
+  # Uncomment to enable the customized error pages in development environment 
+  # config.exceptions_app = self.routes
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 

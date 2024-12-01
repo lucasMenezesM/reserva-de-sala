@@ -12,5 +12,10 @@ Rails.application.routes.draw do
   get "search_reservations", to: "reservations#search_reservations"
   get "search_rooms", to: "rooms#search_rooms"
 
+  # Handling Errors
+  get '/404', to: 'errors#not_found'
+  get '/500', to: 'errors#internal_server_error'
+  get '/401', to: 'errors#unauthorized'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
