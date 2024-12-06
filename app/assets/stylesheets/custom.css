@@ -41,6 +41,18 @@ h1 {
   border-radius: 5px;
 }
 
+.reservation-box select{
+  border-radius: 10px;
+  padding: 4px;
+  margin: 15px 4px;
+}
+
+.custom-select{
+  border-radius: 10px;
+  padding: 4px;
+  margin: 15px 4px;
+}
+
 
 /* WILL PAGINATE STYLE */
 

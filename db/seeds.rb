@@ -78,23 +78,23 @@ users = User.create([
 ])
 
 reservations = Reservation.create([
-  {user: users[0], room: rooms[0], schedule: "2024-11-27T10:00:00"},
-  {user: users[0], room: rooms[1], schedule: "2024-11-28T12:00:00"},
-  {user: users[0], room: rooms[3], schedule: "2024-11-28T16:00:00"},
-  {user: users[0], room: rooms[5], schedule: "2024-11-29T15:30:00"},
+  {user: users[0], room: rooms[0], date: "2024-11-27", time: "10:00:00"},
+  {user: users[0], room: rooms[1], date: "2024-11-28", time: "12:00:00"},
+  {user: users[0], room: rooms[3], date: "2024-11-28", time: "16:00:00"},
+  {user: users[0], room: rooms[5], date: "2024-11-29", time: "15:30:00"},
 
-  {user: users[1], room: rooms[5], schedule: "2024-11-30T17:30:00"},
-  {user: users[2], room: rooms[5], schedule: "2024-11-30T15:30:00"},
-  {user: users[2], room: rooms[24], schedule: "2024-11-29T09:30:00"},
-  {user: users[3], room: rooms[22], schedule: "2024-11-30T09:30:00"},
+  {user: users[1], room: rooms[5], date: "2024-11-30", time: "17:30:00"},
+  {user: users[2], room: rooms[5], date: "2024-11-30", time: "15:30:00"},
+  {user: users[2], room: rooms[24], date: "2024-11-29", time: "09:30:00"},
+  {user: users[3], room: rooms[22], date: "2024-11-30", time: "09:30:00"},
 
-  {user: users[5], room: rooms[10], schedule: "2024-12-27T10:00:00"},
-  {user: users[5], room: rooms[11], schedule: "2024-12-28T12:00:00"},
-  {user: users[4], room: rooms[13], schedule: "2024-12-28T16:00:00"},
-  {user: users[4], room: rooms[17], schedule: "2024-12-29T15:30:00"},
+  {user: users[5], room: rooms[10], date: "2024-12-27", time: "10:00:00"},
+  {user: users[5], room: rooms[11], date: "2024-12-28", time: "12:00:00"},
+  {user: users[4], room: rooms[13], date: "2024-12-28", time: "16:00:00"},
+  {user: users[4], room: rooms[17], date: "2024-12-29", time: "15:30:00"},
 
-  {user: users[5], room: rooms[21], schedule: "2024-12-30T17:30:00"},
-  {user: users[4], room: rooms[15], schedule: "2024-12-30T15:30:00"},
-  {user: users[2], room: rooms[14], schedule: "2024-12-29T09:30:00"},
-  {user: users[3], room: rooms[20], schedule: "2024-12-30T09:30:00"}
+  {user: users[5], room: rooms[21], date: "2024-12-30", time: "17:30:00"},
+  {user: users[4], room: rooms[15], date: "2024-12-30", time: "15:30:00"},
+  {user: users[2], room: rooms[14], date: "2024-12-29", time: "09:30:00"},
+  {user: users[3], room: rooms[20], date: "2024-12-30", time: "09:30:00"}
 ])

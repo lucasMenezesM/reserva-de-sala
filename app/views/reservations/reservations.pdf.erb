@@ -63,7 +63,7 @@
             <td><%=reservation.room.name%></td>
             <td><%=reservation.room.building.name%></td>
             <td><%=reservation.room.floor.name%></td>
-            <td><%=reservation.get_formatted_reservation_schedule%></td>
+            <td><%=reservation.get_schedule%></td>
             <td><%=reservation.created_at.to_s(:long)%></td>
           </tr>
         <%end%>

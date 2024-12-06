@@ -18,6 +18,42 @@ class ReservationsController < ApplicationController
   
   def create
     authorize! :create, Reservation
+
+    month = params.dig(:reservation, :month)
+    day = params.dig(:reservation, :day)
+    hour = params.dig(:reservation, :hour)
+    minutes = params.dig(:reservation, :minutes)
+    year = Date.today.year
+
+    date = "#{year}-#{month}-#{day}"
+    time = "#{hour}:#{minutes}:#{00}"
+
+    reserved_date = Date.new(year.to_i, month.to_i, day.to_i)
+
+    if reserved_date < Date.today
+      puts "invalid date"
+      flash[:alert] = "Error: Choose a valid date to make your reservation!"
+      redirect_to room_path(params[:room_id])
+      return
+    end
+
+    room = Room.find_by(id: params[:room_id])
+
+    if !room.is_available?(date, time)
+      flash[:alert] = "This room is not available at the moment you choose"
+      redirect_to room_path(params[:room_id])
+      return
+    end
+
+    @reservation = Reservation.new(date: date, time:time, user: current_user, room: room)
+
+    if @reservation.save
+      flash[:notice] = "Reservation successfully created!"
+    else
+      flash[:alert] = "Error: An error has occurred while creating this reservation"
+    end
+
+    redirect_to room_path(params[:room_id])
   end
 
   def destroy
@@ -31,6 +67,10 @@ class ReservationsController < ApplicationController
   end
 
   private
+
+  def reservations_params
+    params.require(:reservation).permit(:time, :date, :user, :room)
+  end
 
   def set_reservations
     @q = Reservation.paginate(page: params[:page], per_page: 10).ransack(params[:q])

@@ -18,5 +18,10 @@ class Reservation < ApplicationRecord
     time = schedule.strftime("%H:%M")
     "#{date}, #{time}"
   end
+
+  def get_schedule
+    formatted_time = time.strftime("%H:%M")
+    "#{date}, #{formatted_time}"
+  end
   
 end

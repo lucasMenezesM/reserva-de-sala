@@ -69,3 +69,5 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 gem 'cancancan'
+
+gem 'hirb', '~> 0.7.3'

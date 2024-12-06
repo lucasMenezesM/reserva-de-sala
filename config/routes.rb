@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get "search_reservations", to: "reservations#search_reservations"
   get "search_rooms", to: "rooms#search_rooms"
+  post "render_reservation_form", to: "rooms#render_reservation_form"
 
   # Handling Errors
   get '/404', to: 'errors#not_found'

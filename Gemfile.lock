@@ -95,6 +95,7 @@ GEM
     ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hirb (0.7.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     jbuilder (2.13.0)
@@ -256,6 +257,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise (~> 4.9)
   dotenv-rails
+  hirb (~> 0.7.3)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg

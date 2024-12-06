@@ -9,22 +9,28 @@
       <table class="table table-striped table-dark" id="reservations_results_table">
         <thead>
           <tr>
+            <th><%= sort_link(q, :id, "Id") %></th>
             <th><%= sort_link(q, :room_name, "Room") %></th>
             <th><%= sort_link(q, :room_building_name, "Building") %></th>
             <th><%= sort_link(q, :room_floor_name, "Floor") %></th>
-            <th><%= sort_link(q, :schedule, "Reservation") %></th>
+            <th><%= sort_link(q, :date, "Reservation") %></th>
+            <th><%= sort_link(q, :user, "Reserved by") %></th>
             <th><%= sort_link(q, :created_at, "Made at") %></th>
-            <th>Available Actions</th>
+            <%if user_signed_in?%>
+              <th>Available Actions</th>
+            <%end%>
           </tr>
         </thead>
 
         <tbody>
           <% reservations.each do |reservation| %>
             <tr>
+              <td><%= reservation.id %></td>
               <td><%= reservation.room.name %></td>
               <td><%= reservation.room.building.name %></td>
               <td><%= reservation.room.floor.name %></td>
-              <td><%= reservation.get_formatted_reservation_schedule %></td>
+              <td><%= reservation.get_schedule %></td>
+              <td><%= reservation.user.name %></td>
               <td><%= reservation.created_at.to_s(:long) %></td>
               <% if can? :destroy, reservation %>
                 <td>
@@ -32,7 +38,7 @@
                     Cancel Reservation
                   <%end%>
                 </td>
-              <%else%>
+              <%elsif user_signed_in?%>
                 <td></td>
               <%end%>
             </tr>

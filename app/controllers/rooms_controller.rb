@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[ show edit update destroy ]
-  before_action :set_rooms, only: [:index, :search_rooms]
+  before_action :set_rooms, only: [:index]
 
   # GET /rooms or /rooms.json
   def index
@@ -20,6 +20,12 @@ class RoomsController < ApplicationController
   # GET /rooms/1 or /rooms/1.json
   def show
     authorize! :read, Room
+    @reservation = Reservation.new
+    if current_user
+      @reservations_made = current_user.get_reserved_rooms(@room)
+    else
+      @reservations_made = []
+    end
   end
 
   # GET /rooms/new
@@ -78,6 +84,15 @@ class RoomsController < ApplicationController
   end
 
   def search_rooms
+  
+    date = params.dig(:q, :date)
+    time = params.dig(:q, :time)
+
+    available_rooms = Room.available_rooms(date: date, time: time)
+
+    @q = available_rooms.ransack(params[:q])
+    @rooms = @q.result.paginate(page: params[:page], per_page: 10)
+
     respond_to do |format|
       format.js {render partial: "rooms/rooms"}
     end
