@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :floors
   resources :buildings
   
-  devise_for :users
+  # todo OVERRIDE USERS ROUTES
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   
   get 'about', to: "pages#about"
   root to: "pages#home"
