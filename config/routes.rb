@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources :floors
   resources :buildings
   
-  # todo OVERRIDE USERS ROUTES
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
@@ -12,8 +11,11 @@ Rails.application.routes.draw do
   get 'about', to: "pages#about"
   root to: "pages#home"
 
+  # Search methods
   get "search_reservations", to: "reservations#search_reservations"
   get "search_rooms", to: "rooms#search_rooms"
+  get "search_floors", to: "floors#search_floors"
+  
   post "render_reservation_form", to: "rooms#render_reservation_form"
 
   # Handling Errors

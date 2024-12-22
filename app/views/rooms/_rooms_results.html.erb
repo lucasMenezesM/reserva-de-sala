@@ -50,9 +50,7 @@
         </tbody>
       </table>
 
-      <div class="card-footer">
-        <%= will_paginate rooms, class: "apple_pagination" %>
-      </div>
+      <%= will_paginate rooms, class: "apple_pagination" %>
 
       <%if can? :create, Room%>
         <%=link_to new_room_path, class: "btn btn-success btn-sm mt-3 me-2", target: '_blank' do%>
@@ -70,7 +68,7 @@
   </div>
 <%else%>
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Oops!</strong> No reservation was found with the provided information... 
+    <strong>Oops!</strong> No room was found with the provided information... 
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <%end%>

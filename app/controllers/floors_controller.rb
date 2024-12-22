@@ -1,9 +1,26 @@
 class FloorsController < ApplicationController
   before_action :set_floor, only: %i[ show edit update destroy ]
+  before_action :set_floors, only: [:index, :search_floors]
 
   # GET /floors or /floors.json
   def index
-    @floors = Floor.all
+    authorize! :read, Room
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        authorize! :manage, Room
+        render pdf: "Floors Registered - #{Date.today}",
+               template: "floors/floors",
+               locals: {floors: Floor.all}
+      end
+    end
+  end
+
+  def search_floors
+    respond_to do |format|
+      format.js {render partial: "floors/floors"}
+    end
   end
 
   # GET /floors/1 or /floors/1.json
@@ -61,6 +78,11 @@ class FloorsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_floor
       @floor = Floor.find(params[:id])
+    end
+
+    def set_floors
+      @q = Floor.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+      @floors = @q.result(distinct: true)
     end
 
     # Only allow a list of trusted parameters through.

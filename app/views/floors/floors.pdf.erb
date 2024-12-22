@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= "Floors - #{Date.today.strftime("%m/%d/%Y")}" %></title>
+</head>
+<body>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+  </style>
+
+  <h1>Registered Floors - <%= Date.today.strftime("%m/%d/%Y") %></h1>
+
+  <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Created at</th>
+          <th>Updated at</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%floors.each do |floor|%>
+          <tr>
+            <td><%=floor.name%></td>
+            <td><%=floor.created_at.to_s(:long)%></td>
+            <td><%=floor.updated_at.to_s(:long)%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </body>
+</html>
