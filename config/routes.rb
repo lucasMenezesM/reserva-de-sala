@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "search_reservations", to: "reservations#search_reservations"
   get "search_rooms", to: "rooms#search_rooms"
   get "search_floors", to: "floors#search_floors"
+  get "search_buildings", to: "buildings#search_buildings"
   
   post "render_reservation_form", to: "rooms#render_reservation_form"
 

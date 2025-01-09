@@ -1,9 +1,26 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: %i[ show edit update destroy ]
+  before_action :set_buildings, only: [:index, :search_buildings]
 
   # GET /buildings or /buildings.json
   def index
-    @buildings = Building.all
+    authorize! :read, Building
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        authorize! :manage, Building
+        render pdf: "Buildings Registered - #{Date.today}",
+               template: "buildings/buildings",
+               locals: {buildings: Building.all}
+      end
+    end
+  end
+
+  def search_buildings
+    respond_to do |format|
+      format.js {render partial: "buildings/buildings"}
+    end
   end
 
   # GET /buildings/1 or /buildings/1.json
@@ -61,6 +78,11 @@ class BuildingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_building
       @building = Building.find(params[:id])
+    end
+
+    def set_buildings
+      @q = Building.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+      @buildings = @q.result(distinct: true)
     end
 
     # Only allow a list of trusted parameters through.

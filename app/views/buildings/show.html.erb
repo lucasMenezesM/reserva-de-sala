@@ -1,9 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="card mt-4 shadow-sm bg-dark text-white">
+  <div class="card-header bg-secondary text-white">
+    <h2 class="mb-0">Building Details</h2>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>Name:</strong> <%= @building.name %></p>
+    <p class="card-text"><strong>Rooms:</strong> <%= @building.rooms.count %></p>
+  </div>
+  <div class="card-footer d-flex justify-content-between">
+    <%if can? :edit, Building %> 
+      <div>
+        <%= link_to edit_building_path(@building), class: 'btn btn-primary btn-sm me-2' do%>
+          <i class="fa-solid fa-pen-to-square"></i> Edit
+        <%end%>
+    <%end%>
 
-<p>
-  <strong>Name:</strong>
-  <%= @building.name %>
-</p>
-
-<%= link_to 'Edit', edit_building_path(@building) %> |
-<%= link_to 'Back', buildings_path %>
+    <%if can? :destroy, Building %> 
+        <%= link_to building_path(@building), method: :delete, class: "btn btn-sm btn-danger", :data => {:confirm => "Are you sure you want to delete the Building #{@building.name}?"} do%>
+          <i class="fa-regular fa-trash-can me-1"></i> Delete
+        <%end%>
+      </div>
+    <%end%>
+    <div>
+      <%= link_to buildings_path, class: 'btn btn-secondary' do%>
+        <i class="fa-solid fa-arrow-left"></i> Back
+      <%end%>
+    </div>
+  </div>
+</div>

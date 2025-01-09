@@ -1,6 +1,10 @@
-<h1>Editing Building</h1>
+<div class="text-center mb-3">
+  <h2 class="display-5 fw-bold text-body-emphasis">Edit this Building's information!</h2>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Fill all the information and edit this building to the database.</p>
+  </div>
+</div>
 
-<%= render 'form', building: @building %>
-
-<%= link_to 'Show', @building %> |
-<%= link_to 'Back', buildings_path %>
+<div class="card card-header p-4">
+  <%= render 'form', building: @building %>
+</div>

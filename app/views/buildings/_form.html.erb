@@ -1,6 +1,6 @@
-<%= form_with(model: building) do |form| %>
+<%= form_with(model: building, class: "bg-dark text-white p-4 new-room-form") do |form| %>
   <% if building.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(building.errors.count, "error") %> prohibited this building from being saved:</h2>
 
       <ul>
@@ -11,12 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="row mb-3">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= form.label :name, class: "control-label text-white" %>
+        <%= form.text_field :name, class: "form-control bg-dark text-white", required: true %>
+      </div>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mb-3 mt-5">
+    <%= button_tag(type: 'submit', class: 'btn btn-success me-2') do %>
+      <i class="fa-solid fa-check"></i> Create Building
+    <% end %>
+    <%= link_to buildings_path, class: 'btn btn-secondary' do %>
+      <i class="fa-solid fa-arrow-left-long"></i> Back
+    <%end%>
   </div>
 <% end %>
