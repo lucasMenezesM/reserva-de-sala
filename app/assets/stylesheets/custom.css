@@ -141,6 +141,24 @@ h1 {
 }
 
 
+
+#more_info{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  margin: 60px 0 30px 0;
+}
+
+#more_info .more_info__container{
+  height: 350px;
+}
+
+#end_section{
+  margin-top: 520px;
+  margin-bottom: 90px;
+}
+
+
 /* WILL PAGINATE STYLE */
 
 .apple_pagination {

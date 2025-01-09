@@ -1,2 +1,27 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <%= image_tag('home-page-image.jpg', alt: 'Description of the image', size: "700x500", loading: "lazy", class: "d-block mx-lg-auto img-fluid") %>
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-6 fw-bold text-body-emphasis lh-1 mb-3">Manage and make reservations to different rooms</h1>
+      <p class="lead">Whether for meetings, events, or study sessions, find and book the perfect room in just a few clicks.</p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <%if user_signed_in?%>
+          <%= link_to "Reserve now!", rooms_path, class: "btn btn-primary btn-lg px-4 me-md-2" %>
+        <%else%>
+          <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg px-4 me-md-2" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-secondary btn-lg px-4" %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="more_info">
+  <%= render partial: "more_info"%>
+</section>
+
+<section id="end_section">
+  <%= render partial: "end_section"%>
+</section>
