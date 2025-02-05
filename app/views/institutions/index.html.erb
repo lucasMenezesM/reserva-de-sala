@@ -1,0 +1,40 @@
+<div id="institution-container" class="mt-5">
+  <div class="card text-center">
+    <div class="card-header">
+      <h1>Select an Institution</h1>
+    </div>
+    <div class="card-body">
+      <ul>
+        <% @institutions.each do |institution|%>
+          <%= link_to select_institution_path(institution_id: institution.id), class: "institution-selection-item" do%>
+          <li class="institution-box">
+            <div class="institution-item">
+              <div class="institution-name">
+                <p><%=institution.name%></p>
+              </div>
+              <div class="institution-information">
+                <p>Contact: <%=institution.contact%></p>
+                <p>Rooms: <%=institution.rooms.count%></p>
+                <p>Floors: <%=institution.floors.count%></p>
+                <p>Buildings: <%=institution.buildings.count%></p>
+              </div>
+            </div>
+          </li>
+          <%end%>
+        <% end %>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <%= link_to root_path, class: "btn btn-primary btn-sm" do%>
+        Back to Home Page
+      <% end %>
+
+      <% if can? :manage, Institution%>
+        <%= link_to new_institution_path, class: "ms-2 btn btn-success btn-sm" do%>
+          Create new Institution
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

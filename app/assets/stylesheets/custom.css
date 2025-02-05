@@ -158,6 +158,61 @@ h1 {
   margin-bottom: 90px;
 }
 
+/* institutions style */
+.institution-selection-item {
+  text-decoration: none;
+  transition: 0.8s all;
+  display: block;
+}
+
+.institution-selection-item:hover {
+  transform: scale(1.02);
+}
+
+#institution-container h1{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#institution-container ul{
+
+}
+
+#institution-container li{
+  list-style: none;
+}
+
+.institution-name{
+  font-size: 25px;
+}
+
+.institution-item{
+  display: flex;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background-color: #363636;
+  padding: 5px 20px;
+  height: 80px;
+  margin: 5px 0;
+}
+
+.institution-information{
+  display: flex;
+  gap: 15px;
+  font-size: 18px;
+}
+
+#institution-container .card-header{
+  background-color: #363636;
+  color: white;
+}
+
+#institution-container .card-footer{
+  background-color: #363636;
+  color: white;
+}
 
 /* WILL PAGINATE STYLE */
 

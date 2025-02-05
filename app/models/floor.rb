@@ -1,5 +1,6 @@
 class Floor < ApplicationRecord
   has_many :rooms
+  belongs_to :institution
 
   validates :name, presence: true
 

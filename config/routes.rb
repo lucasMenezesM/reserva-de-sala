@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
+  resources :institutions
   resources :reservations, only: [:index, :create, :destroy]
   resources :rooms
   resources :floors
   resources :buildings
   
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
   }
   
   get 'about', to: "pages#about"
   root to: "pages#home"
+
+  # Select institution
+  get "select_institution", to: "institutions#select_institution"
 
   # Search methods
   get "search_reservations", to: "reservations#search_reservations"

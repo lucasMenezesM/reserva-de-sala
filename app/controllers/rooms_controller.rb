@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_room, only: %i[ show edit update destroy ]
   before_action :set_rooms, only: [:index]
 
@@ -105,7 +106,7 @@ class RoomsController < ApplicationController
     end
 
     def set_rooms
-      @q = Room.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+      @q = Room.where(institution: current_user.institution).paginate(page: params[:page], per_page: 10).ransack(params[:q])
       @rooms = @q.result(distinct: true)
     end
 

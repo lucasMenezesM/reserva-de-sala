@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :reservations
   has_many :rooms, through: :reservations
+  belongs_to :institution, optional: true
 
   enum profile: { admin: "admin", user: "user" }
   

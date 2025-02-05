@@ -1,4 +1,5 @@
 class BuildingsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_building, only: %i[ show edit update destroy ]
   before_action :set_buildings, only: [:index, :search_buildings]
 
@@ -81,7 +82,7 @@ class BuildingsController < ApplicationController
     end
 
     def set_buildings
-      @q = Building.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+      @q = Building.where(institution: current_user.institution).paginate(page: params[:page], per_page: 10).ransack(params[:q])
       @buildings = @q.result(distinct: true)
     end
 

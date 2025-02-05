@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reservations, only: [:index, :search_reservations]
   before_action :set_reservation, only: [:destroy]
 
@@ -28,6 +29,13 @@ class ReservationsController < ApplicationController
     date = "#{year}-#{month}-#{day}"
     time = "#{hour}:#{minutes}:#{00}"
 
+    if time < Time.now
+      flash[:alert] = "Error: Choose a valid date to make your reservation!"
+      redirect_to room_path(params[:room_id])
+      return
+    end
+    
+
     reserved_date = Date.new(year.to_i, month.to_i, day.to_i)
 
     if reserved_date < Date.today
@@ -45,9 +53,12 @@ class ReservationsController < ApplicationController
       return
     end
 
-    @reservation = Reservation.new(date: date, time:time, user: current_user, room: room)
 
-    if @reservation.save
+
+    @reservation = Reservation.new(date: date, time:time, user: current_user, room: room)
+    @reservation.institution = current_user.institution
+
+    if @reservation.save!
       flash[:notice] = "Reservation successfully created!"
     else
       flash[:alert] = "Error: An error has occurred while creating this reservation"
@@ -73,7 +84,7 @@ class ReservationsController < ApplicationController
   end
 
   def set_reservations
-    @q = Reservation.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+    @q = Reservation.where(institution: current_user.institution).paginate(page: params[:page], per_page: 10).ransack(params[:q])
     @reservations = @q.result(distinct: true)
   end
 

@@ -1,4 +1,5 @@
 class FloorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_floor, only: %i[ show edit update destroy ]
   before_action :set_floors, only: [:index, :search_floors]
 
@@ -81,7 +82,7 @@ class FloorsController < ApplicationController
     end
 
     def set_floors
-      @q = Floor.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+      @q = Floor.where(institution: current_user.institution).paginate(page: params[:page], per_page: 10).ransack(params[:q])
       @floors = @q.result(distinct: true)
     end
 
