@@ -1,6 +1,10 @@
-<h1>Editing Institution</h1>
+<div class="text-center mb-3">
+  <h2 class="display-5 fw-bold text-body-emphasis">Edit this institution's information!</h2>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Fill all the information and edit this institution to the database.</p>
+  </div>
+</div>
 
-<%= render 'form', institution: @institution %>
-
-<%= link_to 'Show', @institution %> |
-<%= link_to 'Back', institutions_path %>
+<div class="card card-header p-4">
+  <%= render 'form', institution: @institution %>
+</div>

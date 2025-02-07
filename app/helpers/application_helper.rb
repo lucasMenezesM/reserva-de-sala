@@ -27,4 +27,8 @@ module ApplicationHelper
   def available_minutes
     (0..59).map {|number| [number, number]}
   end
+
+  def is_admin?
+    current_user.present? && current_user.profile == "admin"
+  end
 end

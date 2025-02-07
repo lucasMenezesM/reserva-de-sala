@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :institutions
+  resources :institutions do
+    get :manage, on: :collection
+  end
   resources :reservations, only: [:index, :create, :destroy]
   resources :rooms
   resources :floors

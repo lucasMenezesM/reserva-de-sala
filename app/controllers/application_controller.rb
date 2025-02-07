@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :is_institution_selected?
 
   rescue_from CanCan::AccessDenied do |exception|
-    # Redirecionar para a página de erro personalizada
     redirect_to '/401', alert: exception.message
   end
   
@@ -12,4 +11,11 @@ class ApplicationController < ActionController::Base
       redirect_to institutions_path
     end
   end
+
+  def only_admin!
+    return if current_user.profile == "admin"
+
+    redirect_to root_path, alert: "You don't have permission to access this resource!"
+  end
+
 end

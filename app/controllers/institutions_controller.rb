@@ -1,4 +1,5 @@
 class InstitutionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_institution, only: %i[ show edit update destroy ]
   skip_before_action :is_institution_selected?
 
@@ -6,6 +7,12 @@ class InstitutionsController < ApplicationController
   def index
     authorize! :read, Institution
     @institutions = Institution.all
+  end
+
+  def manage
+    authorize! :manage, Institution
+    @q = Institution.all.paginate(page: params[:page], per_page: 10).ransack(params[:q])
+    @institutions = @q.result(distinct: true)
   end
 
   # GET /institutions/1 or /institutions/1.json
