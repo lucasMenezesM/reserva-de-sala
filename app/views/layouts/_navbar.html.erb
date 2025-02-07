@@ -44,6 +44,13 @@
                   Change Institution
                 <%end%>
               </li>
+              <%if is_admin? %>
+                <li>
+                  <%= link_to manage_institutions_path, class: "dropdown-item" do %>
+                    Manage Institutions
+                  <%end%>
+                </li>
+              <% end %>
             </ul>
           </li>
 

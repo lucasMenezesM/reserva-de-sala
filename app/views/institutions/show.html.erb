@@ -1,19 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="card mt-4 shadow-sm bg-dark text-white">
+  <div class="card-header bg-secondary text-white">
+    <h2 class="mb-0">Institution Details</h2>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>Name:</strong> <%= @institution.name %></p>
+    <p class="card-text"><strong>Contact Information:</strong> <%= @institution.contact %></p>
+    <p class="card-text"><strong>Rooms:</strong> <%= @institution.rooms.count %></p>
+    <p class="card-text"><strong>Floors:</strong> <%= @institution.floors.count %></p>
+    <p class="card-text"><strong>Buildings:</strong> <%= @institution.buildings.count %></p>
+  </div>
+  <div class="card-footer d-flex justify-content-between">
+    <%if can? :edit, Institution %> 
+      <div>
+        <%= link_to edit_institution_path(@institution), class: 'btn btn-primary btn-sm me-2' do%>
+          <i class="fa-solid fa-pen-to-square"></i> Edit
+        <%end%>
+    <%end%>
 
-<p>
-  <strong>Name:</strong>
-  <%= @institution.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @institution.address %>
-</p>
-
-<p>
-  <strong>Contact:</strong>
-  <%= @institution.contact %>
-</p>
-
-<%= link_to 'Edit', edit_institution_path(@institution) %> |
-<%= link_to 'Back', institutions_path %>
+    <%if can? :destroy, Institution %> 
+        <%= link_to institution_path(@institution), method: :delete, class: "btn btn-sm btn-danger", :data => {:confirm => "Are you sure you want to delete the Institution #{@institution.name}?"} do%>
+          <i class="fa-regular fa-trash-can me-1"></i> Delete
+        <%end%>
+      </div>
+    <%end%>
+    <div>
+      <%= link_to institutions_path, class: 'btn btn-secondary' do%>
+        <i class="fa-solid fa-arrow-left"></i> Back
+      <%end%>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 class ErrorsController < ApplicationController
+  skip_before_action :is_institution_selected?
+
   def not_found
     render status: :not_found
   end
