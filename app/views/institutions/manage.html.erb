@@ -1,5 +1,5 @@
 <%if !@institutions.empty?%>
-  <h3>Total @institutions: <%=@institutions.count%></h3>
+  <h3>Total institutions: <%=@institutions.count%></h3>
   <div class="mt-2">
     <div class="">
         
@@ -31,7 +31,7 @@
               </td>
             
               <td>
-                <%= link_to institution_path(institution), method: :delete, class: "btn btn-sm btn-danger", :data => {:confirm => "Are you sure you want to delete the institution #{institution.name}?"} do%>
+                <%= link_to institution_path(institution), method: :delete, class: "btn btn-sm btn-danger", :data => {:confirm => "Are you sure you want to delete the institution #{institution.name}? All the #{institution.rooms.count} rooms, #{institution.floors.count} floors and #{institution.buildings.count} buildings of this institution will be deleted as well."} do%>
                   <i class="fa-regular fa-trash-can me-1"></i> Delete
                 <%end%>
               </td>

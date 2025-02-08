@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   end
   
   def is_institution_selected?
+    if current_user && Institution.all.count == 1
+      current_user.update(institution: Institution.first)
+    end
+
     if current_user && !current_user.institution.present?
       flash[:alert] = "You need to select a institution to proceed!"
       redirect_to institutions_path

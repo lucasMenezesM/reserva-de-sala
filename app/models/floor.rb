@@ -1,5 +1,5 @@
 class Floor < ApplicationRecord
-  has_many :rooms
+  has_many :rooms, dependent: :destroy
   belongs_to :institution
 
   validates :name, presence: true

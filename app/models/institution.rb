@@ -1,7 +1,6 @@
 class Institution < ApplicationRecord
-  has_many :floors
-  has_many :rooms
-  has_many :buildings
-  has_many :reservations
-  
+  has_many :floors, dependent: :destroy
+  has_many :rooms, dependent: :destroy
+  has_many :buildings, dependent: :destroy
+  has_many :reservations, dependent: :destroy
 end
