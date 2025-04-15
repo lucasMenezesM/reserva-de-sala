@@ -71,3 +71,5 @@ gem 'wkhtmltopdf-binary'
 gem 'cancancan'
 
 gem 'hirb', '~> 0.7.3'
+
+gem 'rails_admin'
