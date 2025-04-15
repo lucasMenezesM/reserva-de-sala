@@ -11,7 +11,7 @@ class Reservation < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "room_id", "schedule", "updated_at", "user_id"]
+    ["created_at", "id", "room_id", "schedule", "updated_at", "user_id", "reservation_time"]
   end
 
   def get_formatted_reservation_schedule

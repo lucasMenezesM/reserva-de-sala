@@ -16,54 +16,34 @@ class Room < ApplicationRecord
     ["building", "floor", "reservations", "users"]
   end
 
-  def is_available?(date, time)
-    start_time = Time.zone.parse(time).strftime("%H:%M:%S")
-  end_time = (Time.zone.parse(time) + 2.hours).strftime("%H:%M:%S")
+  def is_available?(chosen_time)
+    start_time = chosen_time - 2.hours + 1.minutes
+    end_time = chosen_time + 2.hours + 1.minutes
 
-  overlapping_reservations = Reservation.where(room: self, date: date)
-                                        .where("time < ? AND time + INTERVAL '2 hours' > ?", end_time, start_time)
+    overlapping_reservations = Reservation.where(room: self)
+      .where("reservation_time BETWEEN ? AND ?", start_time, end_time)
 
-  overlapping_reservations.empty?
+    overlapping_reservations.empty?
   end
 
-  def self.available_rooms(date: nil, time: nil)
-    if time.present? && date.present?
-      time_range_start = Time.parse(time) - 2.hours
-      time_range_end = Time.parse(time) + 2.hours
+  def self.available_rooms(chosen_time)
+    start_time = chosen_time - 2.hours + 1
+    end_time = chosen_time + 2.hours + 1
 
-      occupied_room_ids = Reservation
-                            .where("date = ? AND time >= ? AND time < ?", date, time_range_start, time_range_end)
-                            .pluck(:room_id)
+    occupied_room_ids = Reservation.where("reservation_time BETWEEN ? AND ?", start_time, end_time)
+                                   .pluck(:room_id)
 
-      return Room.where.not(id: occupied_room_ids)
-    end
-
-    if time.present?
-      time_range_start = Time.parse(time) - 2.hours
-      time_range_end = Time.parse(time) + 2.hours
-
-      occupied_room_ids = Reservation
-                            .where("time >= ? AND time < ?", time_range_start, time_range_end)
-                            .pluck(:room_id)
-
-      return Room.where.not(id: occupied_room_ids)
-    end
-
-    if date.present?
-      occupied_room_ids = Reservation.where(date: date).pluck(:room_id)
-      return Room.where.not(id: occupied_room_ids)
-    end
-
-    Room.all
+    return Room.where.not(id: occupied_room_ids)
   end
 
   def get_reserved_schedule
-    Reservation.where(room: self).pluck(:date, :time)
+    Reservation.where(room: self).pluck(:reservation_time)
   end
 
   def get_formatted_schedule
-    schedule = get_reserved_schedule
-    schedule.map { |date, time| "#{date.strftime('%Y-%m-%d')} | #{time.strftime('%H:%M')}" }.join("<br>").html_safe
+    get_reserved_schedule.map do |reservation|
+      reservation.strftime("%d/%m/%Y %H:%M")
+    end.join("<br>").html_safe
   end
   
 end

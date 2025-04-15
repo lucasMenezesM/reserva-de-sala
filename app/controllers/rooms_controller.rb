@@ -85,13 +85,13 @@ class RoomsController < ApplicationController
   end
 
   def search_rooms
-  
-    date = params.dig(:q, :date)
-    time = params.dig(:q, :time)
+    reservation_time = params.dig(:q, :reservations_reservation_time)
 
-    available_rooms = Room.available_rooms(date: date, time: time)
+    reserved_date = Time.zone.parse(reservation_time)
 
-    @q = available_rooms.ransack(params[:q])
+    available_rooms = Room.available_rooms(reserved_date)
+
+    @q = available_rooms.where(institution: current_user.institution).ransack(params[:q])
     @rooms = @q.result.paginate(page: params[:page], per_page: 10)
 
     respond_to do |format|

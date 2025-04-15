@@ -20,23 +20,9 @@ class ReservationsController < ApplicationController
   def create
     authorize! :create, Reservation
 
-    month = params.dig(:reservation, :month)
-    day = params.dig(:reservation, :day)
-    hour = params.dig(:reservation, :hour)
-    minutes = params.dig(:reservation, :minutes)
-    year = Date.today.year
+    chosen_time = params.dig(:reservation, :chosen_time)
 
-    date = "#{year}-#{month}-#{day}"
-    time = "#{hour}:#{minutes}:#{00}"
-
-    if time < Time.now
-      flash[:alert] = "Error: Choose a valid date to make your reservation!"
-      redirect_to room_path(params[:room_id])
-      return
-    end
-    
-
-    reserved_date = Date.new(year.to_i, month.to_i, day.to_i)
+    reserved_date = DateTime.parse(chosen_time)
 
     if reserved_date < Date.today
       puts "invalid date"
@@ -47,15 +33,13 @@ class ReservationsController < ApplicationController
 
     room = Room.find_by(id: params[:room_id])
 
-    if !room.is_available?(date, time)
+    if !room.is_available?(reserved_date)
       flash[:alert] = "This room is not available at the moment you choose"
       redirect_to room_path(params[:room_id])
       return
     end
 
-
-
-    @reservation = Reservation.new(date: date, time:time, user: current_user, room: room)
+    @reservation = Reservation.new(user: current_user, room: room, reservation_time: chosen_time)
     @reservation.institution = current_user.institution
 
     if @reservation.save!
@@ -80,7 +64,7 @@ class ReservationsController < ApplicationController
   private
 
   def reservations_params
-    params.require(:reservation).permit(:time, :date, :user, :room)
+    params.require(:reservation).permit(:user, :room, :reservation_time)
   end
 
   def set_reservations

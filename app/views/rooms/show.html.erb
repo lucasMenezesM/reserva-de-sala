@@ -10,13 +10,12 @@
         <hr>
         <% @reservations_made.each do |reservation|%>
           <p class="mb-0">
-            Date: 
+            Reservation time: 
             <span class="badge text-bg-secondary">
-              <%=reservation.date.strftime("%Y-%m-%d")%>
+              <%=reservation.reservation_time.strftime("%Y-%m-%d")%>
             </span>
-            Time: 
             <span class="badge text-bg-secondary">
-              <%=reservation.time.strftime("%H:%M")%>
+              <%=reservation.reservation_time.strftime("%H:%M")%>
             </span>
           </p>
         <%end%>
@@ -65,40 +64,14 @@
       <%= form_with model: @reservation, url: reservations_path(room_id: @room.id) do |f| %>
         
 
-        <div class="row form-group">
+        <div class="row form-group my-4">
           <div class="col-sm-5">
-            <%= f.label :start_date, class: 'form-label text-white fs-5 me-2' %>
-
-            <%= f.select :month,
-            available_months,
-            { prompt: "Select Month", selected: Date.today.month }, 
-            class: 'custom-select' %>
-              /
-            <%= f.select :day, 
-            available_days,
-            { prompt: "Select Day", selected: Date.today.day },
-            class: 'custom-select' %>
-
+            <%= f.label :start_date, "Choose a date and time to make your reservation", class: 'form-label text-white fs-5 me-2' %>
+            <%= f.datetime_local_field :chosen_time, class: "form-control" %>
           </div>
 
         </div>
 
-        <div class="row form-group">
-          <div class="col-5-sm">
-            <%= f.label :start_time, class: 'form-label text-white fs-5 me-2' %>
-
-            <%= f.select :hour, 
-            available_hour,
-            { prompt: "Select Hour", selected: Date.today.day },
-            class: 'custom-select' %>
-            :
-            <%= f.select :minutes, 
-            available_minutes,
-            { prompt: "Select Minutes", selected: 0 },
-            class: 'custom-select' %>
-          </div>
-        </div>
-        
         <div class="alert alert-warning" role="alert">
           <strong>Attention!</strong> Each reservation lasts only 2 hours!
         </div>
