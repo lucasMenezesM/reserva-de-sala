@@ -7,6 +7,16 @@ class InstitutionsController < ApplicationController
   def index
     authorize! :read, Institution
     @institutions = Institution.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        authorize! :manage, Institution
+        render pdf: "Institutions Registered - #{Date.today}",
+               template: "institutions/index",
+               locals: {institutions: Institution.all}
+      end
+    end
   end
 
   def manage

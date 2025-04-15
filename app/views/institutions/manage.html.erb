@@ -44,11 +44,11 @@
         <%= will_paginate @institutions, class: "apple_pagination" %>
       </div>
 
-      <%=link_to new_floor_path, class: "btn btn-success btn-sm mt-3 me-2", target: '_blank' do%>
-        <i class="fa-solid fa-plus"></i> Create New Floor
+      <%=link_to new_institution_path, class: "btn btn-success btn-sm mt-3 me-2", target: '_blank' do%>
+        <i class="fa-solid fa-plus"></i> Create New Institution
       <%end%>
    
-      <%=link_to floors_path(format: 'pdf'), class: "btn btn-danger btn-sm mt-3", target: '_blank' do%>
+      <%=link_to institutions_path(format: 'pdf'), class: "btn btn-danger btn-sm mt-3", target: '_blank' do%>
         <i class="fa-solid fa-file-pdf"></i> Generate PDF
       <%end%>
       
