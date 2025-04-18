@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 4630319305a258660bb19eac47a0017b4128f539
+  branch: main
+  specs:
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -98,6 +106,11 @@ GEM
       dotenv (= 3.1.4)
       railties (>= 6.1)
     erubi (1.13.0)
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
     ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -303,6 +316,8 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise (~> 4.9)
   dotenv-rails
+  factory_bot_rails (~> 6.3)
+  faker!
   hirb (~> 0.7.3)
   jbuilder (~> 2.7)
   listen (~> 3.3)

@@ -30,6 +30,9 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+  FactoryBot.definition_file_paths = [File.expand_path('spec/factories', __dir__)]
+  FactoryBot.find_definitions
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('spec/fixtures')
 
