@@ -17,8 +17,8 @@ class Room < ApplicationRecord
   end
 
   def is_available?(chosen_time)
-    start_time = chosen_time - 2.hours + 1.minutes
-    end_time = chosen_time + 2.hours + 1.minutes
+    start_time = chosen_time - 2.hours + 1.minutes  
+    end_time = chosen_time + 2.hours - 1.minutes 
 
     overlapping_reservations = Reservation.where(room: self)
       .where("reservation_time BETWEEN ? AND ?", start_time, end_time)
@@ -27,8 +27,8 @@ class Room < ApplicationRecord
   end
 
   def self.available_rooms(chosen_time)
-    start_time = chosen_time - 2.hours + 1
-    end_time = chosen_time + 2.hours + 1
+    start_time = chosen_time - 2.hours + 1.minutes
+    end_time = chosen_time + 2.hours - 1.minutes
 
     occupied_room_ids = Reservation.where("reservation_time BETWEEN ? AND ?", start_time, end_time)
                                    .pluck(:room_id)

@@ -25,7 +25,6 @@ class ReservationsController < ApplicationController
     reserved_date = DateTime.parse(chosen_time)
 
     if reserved_date < Date.today
-      puts "invalid date"
       flash[:alert] = "Error: Choose a valid date to make your reservation!"
       redirect_to room_path(params[:room_id])
       return

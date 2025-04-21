@@ -3,6 +3,10 @@ class Reservation < ApplicationRecord
   belongs_to :room
   belongs_to :institution
 
+  validates :reservation_time, presence: true
+  validates :user, presence: true
+  validates :institution, presence: true
+
   has_one :building, through: :room
   has_one :floor, through: :room
 
@@ -21,8 +25,9 @@ class Reservation < ApplicationRecord
   end
 
   def get_schedule
-    formatted_time = time.strftime("%H:%M")
-    "#{date}, #{formatted_time}"
+    formatted_time = reservation_time.strftime("%H:%M")
+    formatted_date = reservation_time.strftime("%d/%m/%Y")
+    "#{formatted_date}, #{formatted_time}"
   end
   
 end
